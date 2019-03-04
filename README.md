@@ -12,6 +12,11 @@ Download a clone of the project using:
 ```
 git clone https://github.com/amink-93/BookingGoTest
 ```
+Navigate to the correct directory
+
+``` 
+cd BookingGoTests
+```
 
 Build the project using:
 
@@ -31,7 +36,7 @@ mvn test
 Navigate to the correct directory
 
 ``` 
-cd BookingGoTest-master
+cd BookingGoTests
 ```
 
 To start a search run the following command with your desired parameters:
