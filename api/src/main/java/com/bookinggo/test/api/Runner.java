@@ -9,14 +9,8 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        ConfigurableApplicationContext tmp = SpringApplication.run(Runner.class, args);
-        if (tmp.isActive()) {
+        SpringApplication.run(Runner.class, args);
 
-            System.out.println("is active");
-        } else {
-
-            System.out.println("not active");
-        }
 
     }
 
