@@ -7,6 +7,7 @@ import com.bookinggo.test.model.Car;
 import com.bookinggo.test.model.Location;
 import com.bookinggo.test.controller.Controller;
 import com.google.gson.Gson;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,11 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.List;
 
 @RestController
-public class APIController {
+public class APIController implements ErrorController {
 
 
     private Controller controller = new Controller();
-
+    private static final String errorPath = "/error";
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(@RequestParam(value = "pickup") Location pickup,
@@ -46,7 +47,7 @@ public class APIController {
     }
 
 
-    @RequestMapping("/")
+    @RequestMapping(value = errorPath)
     public String error() {
 
         return "{response: ERROR Invalid URL, please refer to the api for reference}";
@@ -57,7 +58,7 @@ public class APIController {
 
         if (e.getClass() == MethodArgumentTypeMismatchException.class) {
 
-            return "{response: Error with parameter format, please see the api documentation for reference}";
+            return "{response: Error with parameter format please see the api documentation for reference}";
         }
 
         if (e.getClass() == MissingServletRequestParameterException.class) {
@@ -83,5 +84,10 @@ public class APIController {
 
             return "{response: Sorry we could not find any cars for you, please try again later}";
         }
+    }
+
+    @Override
+    public String getErrorPath() {
+        return errorPath;
     }
 }
